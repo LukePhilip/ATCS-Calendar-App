@@ -9,6 +9,7 @@ import EventModal from "./components/EventModal";
 function App() {
   const [currenMonth, setCurrentMonth] = useState(getMonth());
   const { monthIndex, showEventModal } = useContext(GlobalContext);
+  const [writingTool, setWritingTool] = useState(undefined)
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
@@ -21,8 +22,8 @@ function App() {
       <div className="h-screen flex flex-col">
         <CalendarHeader />
         <div className="flex flex-1">
-          <Sidebar />
-          <Month month={currenMonth} />
+          <Sidebar setWritingTool={setWritingTool} />
+          <Month month={currenMonth} writingTool={writingTool}/>
         </div>
       </div>
     </React.Fragment>

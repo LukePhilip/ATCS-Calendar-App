@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
 import React, { useContext, useState, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
+import { ReactSketchCanvas } from 'react-sketch-canvas';
 
-export default function Day({ day, rowIdx }) {
+export default function Day({ day, rowIdx, writingTool }) {
   const [dayEvents, setDayEvents] = useState([]);
   const {
     setDaySelected,
@@ -24,6 +25,25 @@ export default function Day({ day, rowIdx }) {
       ? "bg-blue-600 text-white rounded-full w-7"
       : "";
   }
+
+  const styles = {
+    // border: '0.0625rem solid #9c9c9c',
+    // borderRadius: '0.25rem',
+  };
+  
+  const Canvas = () => {
+    return (
+      <ReactSketchCanvas
+        style={styles}
+        // width="600"
+        // height="400"
+        eraseMode={writingTool == 'write' ? false : true}
+        strokeWidth={3}
+        strokeColor="blue"
+      />
+    );
+  }
+
   return (
     <div className="border border-gray-200 flex flex-col">
       <header className="flex flex-col items-center">
@@ -36,9 +56,12 @@ export default function Day({ day, rowIdx }) {
           className={`text-sm p-1 my-1 text-center  ${getCurrentDayClass()}`}
         >
           {day.format("DD")}
+          
         </p>
+        
       </header>
-      <div
+      <Canvas/>
+      {/* <div
         className="flex-1 cursor-pointer"
         onClick={() => {
           setDaySelected(day);
@@ -54,7 +77,8 @@ export default function Day({ day, rowIdx }) {
             {evt.title}
           </div>
         ))}
-      </div>
+      </div> */}
+
     </div>
   );
 }
