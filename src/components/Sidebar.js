@@ -3,18 +3,21 @@ import CreateEventButton from "./CreateEventButton";
 import SmallCalendar from "./SmallCalendar";
 import Labels from "./Labels";
 import { ButtonGroup, Button } from "@material-tailwind/react";
-export default function Sidebar({setWritingTool}) {
+export default function Sidebar({setEraseMode, canvasRef2}) {
+
 
   const handleButtonClick = (action) => {
     // Perform actions based on the button clicked
     switch (action) {
       case 'write':
-        setWritingTool('write')
+        setEraseMode(false)
+        canvasRef2.current?.eraseMode(false);
         console.log('Write button clicked');
         // Implement write logic here
         break;
       case 'erase':
-        setWritingTool('erase')
+        setEraseMode(true)
+        canvasRef2.current?.eraseMode(true);
         console.log('Erase button clicked');
         // Implement erase logic here
         break;
